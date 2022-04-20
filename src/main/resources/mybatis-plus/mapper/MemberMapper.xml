@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccj.gymxmjpa.mapper.MemberMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ccj.gymxmjpa.pojo.Member">
+        <id column="MemberId" property="memberId"/>
+        <result column="MemberName" property="memberName"/>
+        <result column="MemberPhone" property="memberPhone"/>
+        <result column="MemberSex" property="memberSex"/>
+        <result column="MemberAge" property="memberAge"/>
+        <result column="MemberTypes" property="memberTypes"/>
+        <result column="NenberDate" property="nenberDate"/>
+        <result column="Birthday" property="birthday"/>
+        <result column="memberStatic" property="memberStatic"/>
+        <result column="Memberbalance" property="memberbalance"/>
+        <result column="Memberxufei" property="memberxufei"/>
+        <association property="membertype" column="MemberTypes" javaType="com.ccj.gymxmjpa.pojo.Membertype"
+                     select="getMembertype"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        MemberId,
+        MemberName,
+        MemberPhone,
+        MemberSex,
+        MemberAge,
+        MemberTypes,
+        NenberDate,
+        Birthday,
+        memberStatic,
+        Memberbalance,
+        Memberxufei,
+    </sql>
+
+    <select id="getMember" resultMap="BaseResultMap">
+        select *
+        from member
+    </select>
+
+    <select id="getMembertype" resultType="com.ccj.gymxmjpa.pojo.Membertype" parameterType="int">
+        select *
+        from membertype
+        where typeId = #{id}
+    </select>
+
+
+</mapper>

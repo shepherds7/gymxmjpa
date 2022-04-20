@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccj.gymxmjpa.mapper.MemberTypeMapper">
+            <!-- 通用查询映射结果 -->
+            <resultMap id="BaseResultMap" type="com.ccj.gymxmjpa.pojo.Membertype">
+                <id column="Typeid" property="typeId"/>
+                <result column="TypeName" property="typeName"/>
+                <result column="TypeciShu" property="typeciShu"/>
+                <result column="TypeDay" property="typeDay"/>
+                <result column="Typemoney" property="typemoney"/>
+                <collection property="list" column="Typeid" select="getMembers"/>
+            </resultMap>
+
+            <!--通用查询结果列-->
+            <sql id="Base_Column_List">
+                Typeid,
+                TypeName,
+                TypeciShu,
+                TypeDay,
+                Typemoney,
+            </sql>
+
+            <select id="queryByPage" resultMap="BaseResultMap">
+                select *
+                from membertype
+            </select>
+
+            <select id="getMembers" resultType="com.ccj.gymxmjpa.pojo.Member" parameterType="int">
+                select *
+                from member
+                where MemberTypes = #{id}
+            </select>
+
+
+</mapper>
